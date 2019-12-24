@@ -18,29 +18,46 @@ public class UserServices {
 	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	private UserDAO userDAO;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	
-	public UserServices() {
+	public UserServices(HttpServletRequest request,HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
 		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		entityManager = entityManagerFactory.createEntityManager();
 		userDAO = new UserDAO(entityManager);
 	}
-
-	public <List> listUsers(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	public void listUser() throws ServletException, IOException {
+		listUser(null);
+	}
+	
+	public void listUser(String message)
+					throws ServletException, IOException {
 		List<Users> listUsers = userDAO.listAll();
 		
 		request.setAttribute("listUsers", listUsers);
+		
+		
+		if(message != null) {
+		request.setAttribute("message", message);
+		}
+		
 		String listPage = "user_list.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
 		
 		requestDispatcher.forward(request, response);
-		
-		return listUsers;
-		
+	
 				
 	}
 
-	public void createUser(String email, String fullname, String password) {
-		Users newUser = new Users(email, fullname, password);
+	public void createUser() {
+		String email=request.getParameter("email");
+		String fullName=request.getParameter("fullname");
+		String password=request.getParameter("password");
+		
+		
+		Users newUser = new Users(email, fullName, password);
 		userDAO.create(newUser);
 	}
 	
