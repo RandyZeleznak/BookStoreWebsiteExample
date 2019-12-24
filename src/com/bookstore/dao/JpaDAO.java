@@ -1,6 +1,8 @@
 package com.bookstore.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -18,11 +20,9 @@ public class JpaDAO<E> {
 		
 		public E  create(E entity) {
 			entityManager.getTransaction().begin();
-			
 			entityManager.persist(entity);
 			entityManager.flush();
 			entityManager.refresh(entity);
-			
 			entityManager.getTransaction().commit();
 			return entity;
 		}
@@ -53,6 +53,13 @@ public class JpaDAO<E> {
 		 Query query = entityManager.createNamedQuery(queryName);
 		 return query.getResultList();
 		}
+		
+		public List<E> findWithNamedQuery(String queryName, String paramName, String paramValue ){
+			 Query query = entityManager.createNamedQuery(queryName);
+			 query.setParameter(paramName, paramValue);
+			 return query.getResultList();
+			 
+			}
 		
 		public long countWithNamedQuery(String queryName) {
 			Query query = entityManager.createNamedQuery(queryName);
