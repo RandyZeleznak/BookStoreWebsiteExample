@@ -41,25 +41,35 @@ public class UserServices {
 		
 		if(message != null) {
 		request.setAttribute("message", message);
-		}
+		}else {
 		
 		String listPage = "user_list.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
 		
 		requestDispatcher.forward(request, response);
-	
+		}
 				
 	}
 
-	public void createUser() {
+	public void createUser() throws ServletException, IOException {
 		String email=request.getParameter("email");
 		String fullName=request.getParameter("fullname");
 		String password=request.getParameter("password");
 		
+		Users existUser = userDAO.findByEmail(email);
 		
+		if(existUser != null) {
+			String message = "Could not create user. A user with email " +email+ " already exists";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+			dispatcher.forward(request, response);
+		} else {
 		Users newUser = new Users(email, fullName, password);
 		userDAO.create(newUser);
+		}
 	}
+		
+	
 	
 	public void editUser() throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("id"));
@@ -71,7 +81,35 @@ public class UserServices {
 		requestDispatcher.forward(request, response);
 	}
 	
-	
+	public void updateUser() throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullname");
+		String password = request.getParameter("password");
+		
+		System.out.println("UserServices: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
+		Users userById = userDAO.get(userId);
+		Users userByEmail = userDAO.findByEmail(email);
+		
+		if(userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
+			String message = "COULD not update user";
+			request.setAttribute("message", message);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+			requestDispatcher.forward(request, response);
+			
+		} else {
+		
+		Users user = new Users(userId, email, fullName, password);
+		userDAO.create(user);
+		System.out.println("UserServices2: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
+		
+		String message = "User has been updated sucessfully";
+		listUser(message);
+		System.out.println("UserServices3: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
+		
+		}
+	}
 	
 	
 	

@@ -24,6 +24,13 @@
 	</div>
 	
 	<div align="center">
+	<c:if test="${user != null}">
+			<form action="update_user" method="post" onsubmit="return validateFormInput();">
+			<input type="hidden" name="userId" value="${user.userId}">
+		</c:if>
+		<c:if test="${user == null}">
+			<form action="create_user" method="post" onsubmit="return validateFormInput();">
+		</c:if>
 	<form action="create_user" method="post" onsubmit="return validateFormInput();">
 	<table>
 		<tr>
@@ -41,7 +48,7 @@
 		<tr><td> &nbsp; </td></tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" value="Save" onclick="javascript:history.go(-1);">
+				<input type="submit" value="Save" onclick="user_list.jsp">
 				<input type="button" value="Cancel">
 			</td>
 		</tr>
