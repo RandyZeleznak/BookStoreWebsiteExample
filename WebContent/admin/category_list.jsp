@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Bookstore Adminstration Page</title>
+<title>Bookstore Category Administration Page</title>
 </head>
 <body>
 
@@ -13,8 +13,8 @@
 	
 	<div align="center">
 	<div>
-	<h2> Adminstration Dashboard</h2>
-	<h3> <a href="user_form.jsp">Create New User</a> </h3>
+	<h2> Category Administration Dashboard</h2>
+	<h3> <a href="category_form.jsp">Create New Category</a> </h3>
 	
 	<br/><br>
 	</div>
@@ -29,19 +29,17 @@
 			<tr>
 			<th>Index</th>
 			<th>ID</th>
-			<th>Email</th>
-			<th>Full Name</th>
+			<th>Category Name</th>
 			<th>Actions</th>
 			</tr>
-			<c:forEach var="user" items="${listUsers}" varStatus="status">
+			<c:forEach var="cat" items="${listCategories}" varStatus="status">
 			<tr>
 				<td>${status.index + 1}</td>
-				<td>${user.userId }</td>
-				<td>${user.email }</td>
-				<td>${user.fullName }</td>
+				<td>${cat.categoryId}</td>
+				<td>${cat.name }</td>
 				<td> 
-					<a href="edit_user?id=${user.userId}">Edit</a> &nbsp
-					<a href="javascript:confirmDelete(${user.userId})">Delete</a>
+					<a href="edit_category?id=${cat.categoryId}">Edit</a> &nbsp
+					<a href="javascript:confirmDelete(${cat.categoryId})">Delete</a>
 				</td>
 			</tr>
 			</c:forEach>
@@ -49,21 +47,15 @@
 	</div>
 	
 	<script>
-	function confirmDelete(userId){
-		if(confirm("Are You Sure you want to delete ID: "+userId+"?")){
-			window.location = 'delete_user?id=' +userId;
+	function confirmDelete(categoryId){
+		if(confirm("Are You Sure you want to delete category ID: "+categoryId+"?")){
+			window.location = 'delete_category?id=' +categoryId;
 		}
 	}
 	
-	
-	
+
 	</script>
-	
-	
-	
-	
-	
-	
+
 	</div>
 	<jsp:directive.include file="footer.jsp"/>
 </body>

@@ -1,5 +1,3 @@
-
-
 	<div align="center">
 		<div>
 		<img src="../images/trebleheartbeat.png">
@@ -8,15 +6,32 @@
 			Welcome to Admin Page | <a href="Logout">Logout</a>
 			
 		</div>	
-		<tr> &nbsp </tr>
-		<div>
-		<a href="list_users">Users</a>
-		<a href="categories">Categories</a>
-		<a href="books">Books</a>
-		<a href="customers">Customers</a>
-		<a href="reviews">Reviews</a>
-		<a href="orders">Orders</a>
+		<div id="headermenu" >
+			<a href="list_users">
+				<img src="../images/user.png"/><br/>Users</a>
 		</div>
+		<div>
+			<a href="list_categories">
+				<img src="../images/category.png"/><br/>Categories</a>
+		</div>
+		<div>
+			<a href="books">
+				<img src="../images/books.png"/><br/>Books</a>
+		</div>
+		<div>
+			<a href="customers">
+				<img src="../images/customers.png"/><br/>Customers</a>
+		</div>
+		<div>
+			<a href="reviews">
+				<img src="../images/reviews.png"/><br/>Reviews</a>
+		</div>
+		<div>
+			<a href="orders">
+				<img src="../images/orders.png"/><br/>Orders</a>
+		</div>
+		</div>
+		
 			
 	</div>
 	

@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Manage Users - Bookstore Administration Page</title>
+	<meta charset="ISO-8859-1">
+	<title>Manage Users - Bookstore Administration Page</title>
+	<link rel="stylesheet" href="../css/style.css">	
 </head>
+
 <body>
 
 	<jsp:directive.include file="header.jsp"/>
@@ -19,7 +21,7 @@
 	<div align="center">
 	<hr width="60%">
 		<h2>Quick Actions</h2>
-		<a href="create_book">New BOOK</a> &nbsp
+		<a href="create_book">New Book</a> &nbsp
 		<a href="create_user">New User</a> &nbsp
 		<a href="create_category">New Category</a> &nbsp
 		<a href="create_user">New User</a> &nbsp

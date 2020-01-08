@@ -15,17 +15,15 @@ import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.Users;
 
 public class UserServices {
-	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	private UserDAO userDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public UserServices(HttpServletRequest request,HttpServletResponse response) {
+	public UserServices(EntityManager entityManager, HttpServletRequest request,HttpServletResponse response) {
+		this.entityManager = entityManager;
 		this.request = request;
 		this.response = response;
-		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
-		entityManager = entityManagerFactory.createEntityManager();
 		userDAO = new UserDAO(entityManager);
 	}
 	public void listUser() throws ServletException, IOException {
@@ -66,6 +64,7 @@ public class UserServices {
 		} else {
 		Users newUser = new Users(email, fullName, password);
 		userDAO.create(newUser);
+		listUser("User created");
 		}
 	}
 		
@@ -87,32 +86,31 @@ public class UserServices {
 		String fullName = request.getParameter("fullname");
 		String password = request.getParameter("password");
 		
-		System.out.println("UserServices: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
 		Users userById = userDAO.get(userId);
 		Users userByEmail = userDAO.findByEmail(email);
 		
 		if(userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
-			String message = "COULD not update user";
+			String message = "Unable to update user";	
 			request.setAttribute("message", message);
-			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
 			requestDispatcher.forward(request, response);
-			
 		} else {
-		
 		Users user = new Users(userId, email, fullName, password);
-		userDAO.create(user);
-		System.out.println("UserServices2: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
+		userDAO.update(user);
 		
 		String message = "User has been updated sucessfully";
 		listUser(message);
-		System.out.println("UserServices3: userid-> "+userId+", " +email+ ", "+fullName+", "+password);
-		
 		}
+		}
+	
+	
+	public void deleteUser() throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("id"));
+		userDAO.delete(userId);
+		String message = "User has been deleted sucessfully";
+		listUser(message);
+		
 	}
-	
-	
-	
 	
 	
 }
