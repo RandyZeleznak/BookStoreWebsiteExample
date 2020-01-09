@@ -69,7 +69,7 @@
 		$("#userForm").validate({
 			rules:{
 				email:"required",
-				fullname:"required".
+				fullname:"required",
 				password:"required",
 			},
 			messages:{
