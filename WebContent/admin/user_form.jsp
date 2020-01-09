@@ -4,8 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Create New User</title>
+	<meta charset="ISO-8859-1">
+	<title>Create New User</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 
@@ -25,13 +28,13 @@
 	
 	<div align="center">
 	<c:if test="${user != null}">
-			<form action="update_user" method="post" onsubmit="return validateFormInput();">
+			<form action="update_user" method="post" id="userForm">
 			<input type="hidden" name="userId" value="${user.userId}">
 		</c:if>
 		<c:if test="${user == null}">
-			<form action="create_user" method="post" onsubmit="return validateFormInput();">
+			<form action="create_user" method="post" id="userForm">
 		</c:if>
-	<form action="create_user" method="post" onsubmit="return validateFormInput();">
+	<form action="create_user" method="post">
 	<table>
 		<tr>
 			<td>Email:</td>
@@ -60,6 +63,24 @@
 
 </body>
 <script type="text/javascript">
+
+
+	$(document).ready(function(){
+		$("#userForm").validate({
+			rules:{
+				email:"required",
+				fullname:"required".
+				password:"required",
+			},
+			messages:{
+				email:"Email required!",
+				fullName: "Full Name is reuired!",
+				password: "Password is required"
+			}
+		});
+	});
+	
+	
 	function validateFormInput(){
 		
 		var fieldEmail = document.getElementById("email");
