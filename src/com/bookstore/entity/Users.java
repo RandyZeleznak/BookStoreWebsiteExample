@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Users.findAll", query="SELECT u FROM Users u ORDER by u.fullName"),
 	@NamedQuery(name="Users.findByEmail", query="SELECT u FROM Users u WHERE u.email = :email"),
-	@NamedQuery(name="Users.countAll", query="SELECT count(*) FROM Users u")
+	@NamedQuery(name="Users.countAll", query="SELECT count(*) FROM Users u"),
+	@NamedQuery(name="Users.validateLogin", query="SELECT u FROM Users u WHERE u.email = :email and password = :password" )
 })
 public class Users  {
 

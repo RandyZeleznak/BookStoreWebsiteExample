@@ -5,9 +5,6 @@ import java.util.List;
 
 
 
-import javax.persistence.Persistence;
-
-import org.hibernate.mapping.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

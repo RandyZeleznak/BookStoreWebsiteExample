@@ -1,10 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-<div align="center">
+	<div align="center">
 		<div>
 		<img src="../images/trebleheartbeat.png">
 		</div>
 		<div> 
-			Welcome,  <c:out value="${sessionScope.userEmail}"/> <a href="logout">Logout</a>
+			Welcome to Admin Page | <a href="Logout">Logout</a>
 			
 		</div>
 		<div id="headermenu">
