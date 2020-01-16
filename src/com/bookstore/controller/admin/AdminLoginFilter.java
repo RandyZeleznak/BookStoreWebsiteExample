@@ -35,6 +35,7 @@ public class AdminLoginFilter implements Filter {
 		boolean loginPage = httpRequest.getRequestURI().endsWith("login.jsp");
 		
 		if(loggedIn && (loginRequest || loginPage)) {
+			System.out.println("(loggedIn && (loginRequest || loginPage))");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/");
 			dispatcher.forward(request, response);
 		} else if(loggedIn || loginRequest ) {
@@ -46,8 +47,7 @@ public class AdminLoginFilter implements Filter {
 			dispatcher.forward(request, response);
 		}
 		
-		System.out.println("AdminLogin Fileter invocked");
-		chain.doFilter(request, response);
+		
 	}
 
 	

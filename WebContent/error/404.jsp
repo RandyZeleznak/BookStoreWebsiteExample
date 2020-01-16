@@ -7,7 +7,18 @@
 <title>Page Not Found Error</title>
 </head>
 <body>
-	<h2>Requested Page Not Found!</h2>
+
+	<div align="center">
+	<div>
+		<img src="${pageContext.request.contextPath}/images/trebleheartbeat.png"/>
+	</div>
+	<div>
+		<h2>Requested Page Not Found!</h2>
+	</div>
+	<div>
+		<a href="javascript:history.go(-1);">Go Back</a>
+	</div>
+	</div>
 
 </body>
 </html>
