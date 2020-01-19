@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import com.bookstore.entity.Book;
 
 public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
-
+	protected static EntityManagerFactory entityManagerFactory;
+	protected static EntityManager entityManager;
 	
 	public BookDAO(EntityManager entityManager) {
 		super(entityManager);
@@ -18,6 +21,17 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 	public Book create(Book book) {
 		book.setLastUpdateTime(new Date());
 		return super.create(book);
+	}
+	
+	@Override
+	public Book update(Book book) {
+		
+		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+		entityManager = entityManagerFactory.createEntityManager();
+	
+		System.out.println("BookDAO");
+		book.setLastUpdateTime(new Date());
+		return super.update(book);
 	}
 
 	@Override
@@ -49,5 +63,13 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+
+	
+
+	
+
+	
 
 }

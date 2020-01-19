@@ -1,6 +1,8 @@
 package com.bookstore.dao;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,9 +12,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.bookstore.entity.Book;
 import com.bookstore.entity.Category;
@@ -34,7 +40,7 @@ class BookDAOTest extends BaseDAOTest{
 	@Test
 	void testCreateBook() throws ParseException, IOException {
 		Book newBook = new Book();
-		Category category = new Category();
+		Category category = new Category("Advanced Java");
 		category.setCategoryId(2);
 		newBook.setCategory(category);
 		
@@ -56,8 +62,39 @@ class BookDAOTest extends BaseDAOTest{
 		Book createdBook = bookDAO.create(newBook);
 		
 		assertTrue(createdBook.getBookId() > 0);
+	}
+	
+	@Test
+	void testUpdateBook() throws ParseException, IOException {
+
 		
+		Book existBook = new Book();
+		Category category = new Category("Core Java");
+		category.setCategoryId(2);
+		existBook.setCategory(category);
 		
+		existBook.setTitle("Copy Effective Java (2nd Edition)");
+		existBook.setAuthor("Not by Joshua Bloch");
+		existBook.setDescription("Stale coverage of generics, enums, annotations, autoboxing");
+		existBook.setPrice(138.87f);
+		existBook.setIsbn("0321356613");
+		
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		
+		Date publishDate = dateFormat.parse("09/13/1986");
+		existBook.setPublishDate(publishDate);
+		
+		String imagePath = "C:\\Users\\Randy\\Downloads\\BookStoreProjectBooks\\books\\Effective Java.jpg";
+		byte [] imageBytes = Files.readAllBytes(Paths.get(imagePath));
+		existBook.setImage(imageBytes);
+		
+		Book updatedBook = bookDAO.update(existBook);
+		
+		assertEquals(updatedBook.getTitle(), "Copy Effective Java (2nd Edition)");
 	}
 
+	
+	
+	
+	
 }
