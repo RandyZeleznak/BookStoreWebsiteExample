@@ -17,7 +17,7 @@
 				<img src="../images/category.png"/><br/>Categories</a>
 		</div>
 		<div>
-			<a href="books">
+			<a href="list_books">
 				<img src="../images/books.png"/><br/>BOOKS</a>
 		</div>
 		<div>

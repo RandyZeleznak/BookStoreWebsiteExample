@@ -4,14 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import com.bookstore.entity.Book;
 
 public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
-	protected static EntityManagerFactory entityManagerFactory;
-	protected static EntityManager entityManager;
+	
 	
 	public BookDAO(EntityManager entityManager) {
 		super(entityManager);
@@ -25,43 +22,44 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 	
 	@Override
 	public Book update(Book book) {
-		
-		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
-		entityManager = entityManagerFactory.createEntityManager();
-	
-		System.out.println("BookDAO");
 		book.setLastUpdateTime(new Date());
 		return super.update(book);
 	}
-
+	
 	@Override
-	public Book get(Object id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Book get(Object bookId) {
+		return super.find(Book.class, bookId);
 	}
 
 	@Override
-	public void delete(Object id) {
-		// TODO Auto-generated method stub
+	public void delete(Object bookId) {
+		super.delete(Book.class, bookId);
+	}
+
+		@Override
+	public List<Book> listAll() {
+		return super.findWithNamedQuery("Book.findAll");
+	}
+
+	public Book findByTitle(String title) {
+		List<Book> result = super.findWithNamedQuery("Book.findByTitle", "title", title);
 		
+		if(!result.isEmpty()) {
+			return result.get(0);
+		}
+		return null;
+		
+	}
+	
+	@Override
+	public long count() {
+		return super.countWithNamedQuery("Book.countAll");
 	}
 
 	@Override
 	public List<Book> findWithNamedQuery() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public List<Book> listAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	
