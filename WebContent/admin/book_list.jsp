@@ -36,6 +36,7 @@
 			<th>ID</th>
 			<th>Image</th>
 			<th>Title</th>
+			<th>Author</th>
 			<th>Category</th>
 			<th>Price</th>
 			<th>Last Updated</th>
@@ -50,6 +51,7 @@
 					<img src="data:image/jpg;base64,${book.base64Image}" width="84" height="110"/>
 				</td>
 				<td>${book.title }</td>
+				<td>${book.author }</td>
 				<td>${book.category.name }</td>
 				<td>${book.price }</td>
 				<td>${book.lastUpdateTime }</td>

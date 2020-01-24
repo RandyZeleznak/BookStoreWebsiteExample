@@ -1,6 +1,11 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +13,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
@@ -27,6 +33,7 @@ public class BookServices {
 		this.request = request;
 		this.response = response;
 		bookDAO = new BookDAO(entityManager);
+		categoryDAO = new CategoryDAO(entityManager);
 	}
 	
 	public void listBooks() throws ServletException, IOException {
@@ -47,6 +54,80 @@ public class BookServices {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(newPage);
 		requestDispatcher.forward(request, response);
 	}
+
+	public void createBook() throws ServletException, IOException {
+		Integer categoryId = Integer.parseInt(request.getParameter("category"));
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String description = request.getParameter("description");
+		String isbn = request.getParameter("isbn");
+		float price = Float.parseFloat(request.getParameter("price"));
+		
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date publishDate = null;
+		
+		try {
+			publishDate = dateFormat.parse(request.getParameter("publishDate"));
+		} catch (ParseException ex) {
+			ex.printStackTrace();
+			throw new ServletException("Error parsing publish date (Format MM/dd/yyyy)");
+		}
+		
+		System.out.println("Category ID: " +categoryId);
+		System.out.println("Title: " +title);
+		System.out.println("Author: " +author);
+		System.out.println("Description: " +description);
+		System.out.println("isbn: " +isbn);
+		System.out.println("price: " +price);
+		System.out.println("Publish Date: " +publishDate);
+		
+		Book newBook = new Book();
+		newBook.setTitle(title);
+		newBook.setAuthor(author);
+		newBook.setDescription(description);
+		newBook.setIsbn(isbn);
+		newBook.setPrice(price);
+		newBook.setPublishDate(publishDate);
+		
+		Category category = categoryDAO.get(categoryId);
+		newBook.setCategory(category);
+		
+		Part part = request.getPart("bookImage");
+		
+		if(part != null && part.getSize() > 0) {
+			long size = part.getSize();
+			byte[] imageBytes = new byte[(int) size];
+			
+			InputStream inputStream = part.getInputStream();
+			inputStream.read(imageBytes);
+			inputStream.close();
+			
+			newBook.setImage(imageBytes);
+		}
+		
+		Book createdBook = BookDAO.create(newBook);
+		
+		if(createdBook.getBookId() > 0) {
+			String message = "New Book has been created";
+			request.setAttribute("message", message);
+			listBooks();
+		}
+		
+	}
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
