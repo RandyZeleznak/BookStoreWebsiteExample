@@ -35,10 +35,17 @@ public class BookServices {
 		bookDAO = new BookDAO(entityManager);
 		categoryDAO = new CategoryDAO(entityManager);
 	}
-	
+
 	public void listBooks() throws ServletException, IOException {
+		listBooks(null);
+	}
+	public void listBooks(String message) throws ServletException, IOException {
 		List <Book> listBooks = bookDAO.listAll();
 		request.setAttribute("listBooks", listBooks);
+		
+		if(message != null) {
+			request.setAttribute("message", message);
+		}
 		
 		String listPage = "book_list.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
@@ -58,6 +65,15 @@ public class BookServices {
 	public void createBook() throws ServletException, IOException {
 		Integer categoryId = Integer.parseInt(request.getParameter("category"));
 		String title = request.getParameter("title");
+		
+		Book existBook = bookDAO.findByTitle(title);
+		
+		if(existBook != null) {
+			String message = "ERROR: \"" +title+ "\" Already Exists!";
+			listBooks(message);
+			return;
+		}
+		
 		String author = request.getParameter("author");
 		String description = request.getParameter("description");
 		String isbn = request.getParameter("isbn");
@@ -105,13 +121,27 @@ public class BookServices {
 			newBook.setImage(imageBytes);
 		}
 		
-		Book createdBook = BookDAO.create(newBook);
+		Book createdBook = bookDAO.create(newBook);
 		
 		if(createdBook.getBookId() > 0) {
 			String message = "New Book has been created";
 			request.setAttribute("message", message);
-			listBooks();
+			listBooks(message);
 		}
+		
+	}
+
+	public void editBook() throws ServletException, IOException {
+		Integer bookId = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDAO.get(bookId);
+		List<Category> listCategory = categoryDAO.listAll();
+		
+		request.setAttribute("book", book);
+		request.setAttribute("listCategories", listCategory);
+		
+		String editPage = "book_form.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
+		requestDispatcher.forward(request, response);
 		
 	}
 	
