@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <div align="center">
 		<div>
-		<img src="../images/trebleheartbeat.png">
+		<img src="../images/trebleheartbeat.png" width="300" height="250">
 		</div>
 		<div> 
 			Welcome,  <c:out value="${sessionScope.userEmail}"/> <a href="logout">Logout</a>
@@ -10,27 +10,27 @@
 		<div id="headermenu">
 		<div>
 			<a href="list_users">
-				<img src="../images/user.png"/><br/>USERS</a>
+				<img src="../images/user.png" width="40" height="50"/><br/>USERS</a>
 		</div>
 		<div> 
 			<a href="list_categories">
-				<img src="../images/category.png"/><br/>Categories</a>
+				<img src="../images/category.png" width="40" height="50"/><br/>Categories</a>
 		</div>
 		<div>
 			<a href="list_books">
-				<img src="../images/books.png"/><br/>BOOKS</a>
+				<img src="../images/books.png" width="40" height="50"/><br/>BOOKS</a>
 		</div>
 		<div>
 			<a href="customers">
-				<img src="../images/customers.png"/><br/>Customers</a>
+				<img src="../images/customers.png" width="40" height="50"/><br/>Customers</a>
 		</div>
 		<div>
 			<a href="reviews">
-				<img src="../images/reviews.png"/><br/>Reviews</a>
+				<img src="../images/reviews.png" width="40" height="50"/><br/>Reviews</a>
 		</div>
 		<div>
 			<a href="orders">
-				<img src="../images/orders.png"/><br/>Orders</a>
+				<img src="../images/orders.png" width="30" height="30"/><br/>Orders</a>
 		</div>
 		</div>
 		

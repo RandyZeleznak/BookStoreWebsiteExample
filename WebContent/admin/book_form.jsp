@@ -41,8 +41,14 @@
 				<td>
 					<select name="category">
 						<c:forEach items="${listCategories}" var="category">
+						<c:if test="${category.categoryId eq book.category.categoryId}">
+						 	<option value="${category.categoryId}" selected>
+						</c:if>
+						<c:if test="${category.categoryId ne book.category.categoryId}">
 						 	<option value="${category.categoryId}">
+						 </c:if>
 						 	${category.name}
+						</option>
 						</c:forEach>
 					</select>
 				</td>
@@ -81,7 +87,7 @@
 			<tr>
 				<td align="right">Description:</td>
 				<td align="left">
-				<textarea rows="5" cols="50" name="description" id="description" value="${book.description}"></textarea>
+				<textarea rows="5" cols="50" name="description" id="description" >${book.description} </textarea>
 				</td>
 			</tr>	
 			<tr><td>&nbsp;</td></tr>
@@ -111,8 +117,10 @@
 				title: "required",
 				author: "required",
 				isbn: "required",
-				publishDate: "required",
+				publishDate: "required"
+				<c:if test="${book == null}">
 				bookImage: "required",
+				</c:if>
 				price: "required",
 				description:"required",
 			},
