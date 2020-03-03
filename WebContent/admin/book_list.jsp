@@ -53,7 +53,7 @@
 				<td>${book.title }</td>
 				<td>${book.author }</td>
 				<td>${book.category.name }</td>
-				<td>${book.price }</td>
+				<td>$${book.price }</td>
 				<td>${book.lastUpdateTime }</td>
 				
 				<td> 

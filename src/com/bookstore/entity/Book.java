@@ -226,6 +226,9 @@ public class Book implements java.io.Serializable {
 		this.base64Image = base64Image;
 	}
 
+	
+	
+	
 	@Transient
 	public float getAverageRating() {
 		float averageRating = 0.0f;
