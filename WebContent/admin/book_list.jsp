@@ -75,9 +75,9 @@
 	$(document).ready(function(){
 		$(".deleteLink").each(function(){
 			$(this).on("click",function(){
-				userId= $(this).attr("id");
-				if(confirm("Are You Sure you want to delete ID: "+userId+"?")){
-					window.location = 'delete_user?id=' +userId;
+				bookId= $(this).attr("id");
+				if(confirm("Are You Sure you want to delete ID: "+bookId+"?")){
+					window.location = 'delete_book?id=' +bookId;
 				}
 			});
 		});

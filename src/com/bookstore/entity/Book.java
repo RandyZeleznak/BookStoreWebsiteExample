@@ -35,6 +35,8 @@ import javax.swing.event.TreeSelectionEvent;
 @NamedQuery(name="Book.findAll", query = "SELECT b from Book b"),
 @NamedQuery(name="Book.findByTitle", query = "SELECT b from Book b WHERE b.title = :title"),
 @NamedQuery(name="Book.countAll", query = "SELECT count(*) from Book b"),
+@NamedQuery(name="Book.findByCategory", query="SELECT b from Book b JOIN "
+	+ "Category c ON b.category.categoryId = c.categoryId AND c.categoryId = :catId")
 })
 
 public class Book implements java.io.Serializable {
