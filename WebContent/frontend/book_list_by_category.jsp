@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Z-Squared Book Store</title>
+<title>Z-Squared Book Store - List Books by ${category.name}</title>
 <link rel="stylesheet" href="css/style.css">	
 </head>
 <body>
@@ -14,10 +14,12 @@
 	<jsp:directive.include file="header.jsp"/>
 	
 	<div align="center">
-		<h2> Home of the Information Age</h2>
-			<div align="center" style="width:80%; margin: 0 auto;" >
-		<c:forEach items="${listNewBooks}" var="book">
-			<div  style = "display: inline-block; margin:10px">
+	<h2> ${category.name }</h2>	
+	</div>
+	
+	<div align="center" style="width:80%; margin: 0 auto;" >
+		<c:forEach items="${listBooks}" var="book">
+			<div style="float: left; display: inline-block; margin:10px">
 				<div>
 					<div>
 						<a href="view_book?id=${book.bookId}">
@@ -36,13 +38,6 @@
 				</div>
 			</div>
 		</c:forEach> 	
-	</div>
-	<div align="center" style="clear:both">
-		<h2> Best Sellers</h2>
-	</div>
-	<div align="center" style="clear:both">
-		<h2> Favorites</h2>
-	</div>
 	</div>
 	
 	<jsp:directive.include file="footer.jsp"/>

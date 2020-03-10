@@ -2,7 +2,7 @@
 
 	<div align="center">
 		<div>
-		<img src="images/trebleheartbeat.png">
+		<img src="images/trebleheartbeat.png" height="100">
 		</div>
 		<h1>Welcome to  Z-Squared Bookstore!</h1>
 		<div>
