@@ -204,6 +204,35 @@ public class BookDaoTest extends BaseDAOTest{
 		 
 	}
 	
+	@Test
+	public void testSeachBookInTitle() {
+		String keyword = "Java";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getTitle());
+		}
+		assertEquals(4, result.size());
+	}
+	
+	@Test
+	public void testSeachBookInAuthor() {
+		String keyword = "Bloch";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getTitle()+" by "+aBook.getAuthor());
+		}
+		assertEquals(1, result.size());
+	}
+	
+	@Test
+	public void testSeachBookInDescription() {
+		String keyword = "web";
+		List<Book> result = bookDao.search(keyword);
+		for (Book aBook : result) {
+			System.out.println(aBook.getTitle()+" by "+aBook.getAuthor());
+		}
+		assertEquals(3, result.size());
+	}
 	
 }
 
