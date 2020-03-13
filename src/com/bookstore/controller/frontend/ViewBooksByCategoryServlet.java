@@ -22,7 +22,7 @@ public class ViewBooksByCategoryServlet extends BaseServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookServices bookServices = new BookServices(entityManager, request, response);
+		BookServices bookServices = new BookServices( request, response);
 		bookServices.listBooksByCategory();
 	}
 

@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/search")
-public class SeatchBookServlet extends BaseServlet {
+public class SearchBookServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
    
-    public SeatchBookServlet() {
+    public SearchBookServlet() {
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookServices bookServices = new BookServices(entityManager, request, response);
+		BookServices bookServices = new BookServices(request, response);
 		bookServices.search();
 	}
 

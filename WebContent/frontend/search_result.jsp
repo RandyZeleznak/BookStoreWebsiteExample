@@ -15,7 +15,7 @@
 	
 	<jsp:directive.include file="header.jsp"/>
 	
-	<div align="center">
+	<div class="center">
 	<c:if test = "${fn:length(result) == 0}">
 		<h2> No Results for "${keyword}" </h2>
 	</c:if>	
@@ -24,14 +24,14 @@
 				<center><h2> Results for ${keyword}</h2></center>
 				<c:forEach items="${result}" var="book">
 					<div>
-						<div  style = "display: inline-block; margin:20px;" align="left" width:"10%">
+						<div  style = "display: inline-block; margin:20px; width:10%">
 							<div>
 									<a href="view_book?id=${book.bookId}">
 									<img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
 									</a>
 							</div>
 						</div>
-						<div style="display: inline-block; margin: 20px; vertical-align: top;" align="left" width="60%">
+						<div style="display: inline-block; margin: 20px; vertical-align: top; align=left; width:60%">
 							<div>
 								<h2><a href="view_book?id=${book.bookId}">
 									<b>${book.title}</b>
