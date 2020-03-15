@@ -15,12 +15,12 @@
 	
 	<jsp:directive.include file="header.jsp"/>
 	
-	<div align="center">
-		<h2> Home of the Information Age</h2>
+	<div class="center">
+		<h2> New Book</h2>
 			<div align="center" style="width:80%; margin: 0 auto;" >
 				
 				<c:forEach items="${listNewBooks}" var="book">
-					<div  style = "display: inline-block; margin:10px">
+					<div  class = "book">
 						<div>
 							<div>
 								<a href="view_book?id=${book.bookId}">
@@ -40,10 +40,10 @@
 					</div>
 				</c:forEach> 	
 			</div>	
-			<div align="center" style="clear:both">
+			<div class = "next-row">
 				<h2> Best Selling Books:</h2>
 			</div>
-			<div align="center" style="clear:both">
+			<div class = "next-row">
 				<h2> Most-favored Books:</h2>
 			</div>
 	</div>
