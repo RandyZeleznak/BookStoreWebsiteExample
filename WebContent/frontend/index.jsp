@@ -17,14 +17,13 @@
 	
 	<div class="center">
 		<h2> New Book</h2>
-			<div align="center" style="width:80%; margin: 0 auto;" >
 				
 				<c:forEach items="${listNewBooks}" var="book">
 					<div  class = "book">
 						<div>
 							<div>
 								<a href="view_book?id=${book.bookId}">
-								<img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
+								<img class = "book-small" src="data:image/jpg;base64,${book.base64Image}"/>
 								</a>
 							</div>
 							<div>
@@ -39,7 +38,7 @@
 						</div>
 					</div>
 				</c:forEach> 	
-			</div>	
+				
 			<div class = "next-row">
 				<h2> Best Selling Books:</h2>
 			</div>

@@ -17,24 +17,25 @@
 		<table class="book">
 			<tr>
 				<td colspan="3" align="left">
-					<h2>${book.title}</h2> by ${book.author }
+					<p id="book-title"> ${book.title}</p>
+					 by <span id="author">${book.author }</span>
 				</td>
 			</tr>
 			<tr>
 				<td rowspan="2">
-					<img src="data:image/jpg;base64,${book.base64Image}" width="200" height="250"/>
+					<img class="book-large" src="data:image/jpg;base64,${book.base64Image}"/>
 				</td>
 				<td valign="top" align="left">
 					Rating : *****
 				</td>
 				<td valign="top" rowspan="2" width="20%">
 					<h2>$${book.price}</h2>
-					</br>
+					<br/>
 					<button type="submit" >Add to Cart</button>
 				</td>
 			</tr>
 			<tr>
-				<td valign="top" style="text-align:justify">
+				<td id="description">
 					${book.description}
 				</td>
 			</tr>
