@@ -124,7 +124,7 @@
 				title: "required",
 				author: "required",
 				isbn: "required",
-				publishDate: "required"
+				publishDate: "required",
 				<c:if test="${book == null}">
 				bookImage: "required",
 				</c:if>

@@ -204,6 +204,14 @@ public class BookDaoTest {
 	}
 	
 	@Test
+	public void testCountByCategory() {
+		int categoryId = 3;
+		long numOfBooks = bookDao.countByCategory(categoryId);
+		
+		assertTrue(numOfBooks == 6 );
+	}
+	
+	@Test
 	public void testSeachBookInTitle() {
 		String keyword = "Java";
 		List<Book> result = bookDao.search(keyword);
