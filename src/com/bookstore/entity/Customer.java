@@ -79,7 +79,7 @@ public class Customer implements java.io.Serializable {
 		this.customerId = customerId;
 	}
 
-	@Column(name = "E-mail", unique = true, nullable = false, length = 64)
+	@Column(name = "email", unique = true, nullable = false, length = 64)
 	public String getEMail() {
 		return this.EMail;
 	}
@@ -88,7 +88,7 @@ public class Customer implements java.io.Serializable {
 		this.EMail = EMail;
 	}
 
-	@Column(name = "full-name", nullable = false, length = 30)
+	@Column(name = "fullname", nullable = false, length = 30)
 	public String getFullName() {
 		return this.fullName;
 	}
