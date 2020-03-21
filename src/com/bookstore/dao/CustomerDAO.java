@@ -24,22 +24,23 @@ public class CustomerDAO extends JpaDAO<Customer> implements GenericDAO<Customer
 		super.delete(Customer.class, id);
 	}
 
-	@Override
-	public List<Customer> findWithNamedQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<Customer> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.findWithNamedQuery("Customer.findAll");
+		
 	}
 
 	@Override
 	public long count() {
+		return super.countWithNamedQuery("Customer.countAll");
+	}
+
+	@Override
+	public List<Customer> findWithNamedQuery() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }
