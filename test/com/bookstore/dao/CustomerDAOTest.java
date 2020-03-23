@@ -26,14 +26,14 @@ public class CustomerDAOTest {
 	@Test
 	public void testCreateCustomer() {
 		Customer customer = new Customer();
-		customer.setEMail("Jane@gmail.com");
-		customer.setFullName("Jane Williams");
-		customer.setCity("Philadelphia");
-		customer.setCountry("United States");
-		customer.setAddress("100 North Avenue B");
+		customer.setEMail("Bobby@gmail.com");
+		customer.setFullName("Robert Plant");
+		customer.setCity("London");
+		customer.setCountry("England");
+		customer.setAddress("330 B 16 Manchester Blvd");
 		customer.setPassword("password");
-		customer.setPhone("16467861234");
-		customer.setZipcode("54378");
+		customer.setPhone("116467861234");
+		customer.setZipcode("123-54378");
 		
 		Customer savedCustomer = customerDao.create(customer);
 		

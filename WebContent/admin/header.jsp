@@ -23,7 +23,7 @@
 				<img src="../images/books.png" width="40" height="50"/><br/>BOOKS</a>
 		</div>
 		<div>
-			<a href="customers">
+			<a href="list_customer">
 				<img src="../images/customers.png" width="40" height="50"/><br/>Customers</a>
 		</div>
 		<div>
