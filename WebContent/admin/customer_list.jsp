@@ -8,7 +8,6 @@
 <title>Bookstore Customer Management Page</title>
 	<link rel="stylesheet" href="../css/style.css">
 	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 
@@ -17,7 +16,7 @@
 	<div align="center">
 	<div>
 	<h2 class="pageheading"> Customer Management Dashboard</h2>
-	<h3> <a href="new_customer">Create New Customer</a> </h3>
+	<h3> <a href="customer_form.jsp">Create New Customer</a> </h3>
 	
 	<br/><br>
 	</div>
@@ -44,13 +43,13 @@
 			</tr>
 			<c:forEach var="customer" items="${listCustomer}" varStatus="status">
 			<tr>
-				<td>${status.index + 1}</td>
-				<td>${customer.customerId }</td>
-				<td>${customer.email }</td>
-				<td>${customer.fullName }</td>
-				<td>${customer.city }</td>
-				<td>$${customer.country }</td>
-				<td>${customer.registerDate }</td>
+				<td>${status.index+1}</td>
+				<td>${customer.customerId}</td>
+				<td>${customer.email}</td>
+				<td>${customer.fullName}</td>
+				<td>${customer.city}</td>
+				<td>${customer.country}</td>
+				<td>${customer.registerDate}</td>
 				
 				<td> 
 					<a href="edit_customer?id=${customer.customerId}">Edit</a> &nbsp;
@@ -72,7 +71,7 @@
 		$(".deleteLink").each(function(){
 			$(this).on("click",function(){
 				customerId= $(this).attr("id");
-				if(confirm("Are You Sure you want to delete ID: "+customerId+"?")){
+				if(confirm("Are You Sure you want to delete customer with  ID: "+customerId+"?")){
 					window.location = 'delete_customer?id=' +customerId;
 				}
 			});

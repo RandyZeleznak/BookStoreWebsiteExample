@@ -26,7 +26,7 @@ public class CustomerDAOTest {
 	@Test
 	public void testCreateCustomer() {
 		Customer customer = new Customer();
-		customer.setEMail("Bobby@gmail.com");
+		customer.setEmail("Bobby@gmail.com");
 		customer.setFullName("Robert Plant");
 		customer.setCity("London");
 		customer.setCountry("England");
@@ -87,7 +87,40 @@ public class CustomerDAOTest {
 		assertEquals(2, totalCustomers);
 	}
 	
+	@Test
+	public void testFindByEmail() {
+		 String email = "tom@gmail.com";
+		 Customer customer = customerDao.findByEmail(email);
+		
+		 
+		 assertNotNull(customer);
+	}
 	
+	@Test
+	public void testCheckLogInSuccess() {
+			String email = "brian@may.com";
+			String password = "password";
+			
+			Customer customer = customerDao.checkLogin(email, password);
+			
+			assertNotNull(customer);
+	}
+	
+	@Test
+	public void testCheckLogInFail() {
+			String email = "brian@mqy.com";
+			String password = "password";
+			
+			Customer customer = customerDao.checkLogin(email, password);
+			
+			assertNull(customer);
+	}
 	
 
+	
+	
+	
+	
+	
+	
 }
