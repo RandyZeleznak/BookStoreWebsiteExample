@@ -3,7 +3,7 @@
 	<div class="center">
 		<div>
 		<a href="${pageContext.request.contextPath}">
-		<img src="images/trebleheartbeat.png" width="300" height="200">
+		<img src="images/trebleheartbeat.png" width="225" height="125">
 		</a>
 		</div>
 		<h1>Welcome to  Z-Squared Bookstore!</h1>

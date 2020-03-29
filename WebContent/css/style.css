@@ -105,6 +105,9 @@ table.book{
 	border: 0;
 	margin: 0 auto;
 }
+table.normal{
+	border: 0;
+}
 
 
 div.book-group{

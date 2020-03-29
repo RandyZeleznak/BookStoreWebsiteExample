@@ -76,6 +76,33 @@ public class CustomerServices {
 		}
 		
 	}
+	private void updateCustomerFieldsFromForm(Customer customer) {
+		String email = request.getParameter("email");
+		String fullName = request.getParameter("fullName");
+		String password = request.getParameter("password");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String city = request.getParameter("city");
+		String zipCode = request.getParameter("zipCode");
+		String country = request.getParameter("country");
+		
+		if (email != null && !email.equals("")) {
+			customer.setEmail(email);
+		}
+
+		System.out.println("Email = " +email);
+		customer.setFullName(fullName);
+		
+		if (password != null && !password.equals("")) {
+			customer.setPassword(password);
+		}
+		
+		customer.setPhone(phone);
+		customer.setAddress(address);
+		customer.setCity(city);
+		customer.setZipcode(zipCode);
+		customer.setCountry(country);		
+	}
 	
 	public void registerCustomer() throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -195,11 +222,30 @@ public class CustomerServices {
 			showLogin();
 		} else {
 			request.getSession().setAttribute("loggedCustomer", customer);
-			String profilePage = "frontend/customer_profile.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
-			dispatcher.forward(request, response);
+			showCustomerProfile();
 		}
 		
+	}
+	
+	public void showCustomerProfile() throws ServletException, IOException {
+		String profilePage = "frontend/customer_profile.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(profilePage);
+		dispatcher.forward(request, response);
+	}
+
+	public void showCustomerProfileEditForm() throws ServletException, IOException {
+		String editPage = "frontend/edit_profile.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
+		dispatcher.forward(request, response);
+		
+	}
+
+	public void updateCustomerProfile() throws ServletException, IOException {
+	Customer customer = (Customer) request.getSession().getAttribute("loggedCustomer");
+	updateCustomerFieldsFromForm(customer);
+	customerDAO.update(customer);
+	showCustomerProfile();
+	
 	}
 	
 
