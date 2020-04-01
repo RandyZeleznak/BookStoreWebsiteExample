@@ -27,7 +27,7 @@
 				<img src="../images/customers.png" width="40" height="50"/><br/>Customers</a>
 		</div>
 		<div>
-			<a href="reviews">
+			<a href="list_review">
 				<img src="../images/reviews.png" width="40" height="50"/><br/>Reviews</a>
 		</div>
 		<div>

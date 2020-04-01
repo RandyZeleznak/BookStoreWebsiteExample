@@ -27,7 +27,7 @@
 		
 		<table class="form">
 			
-			<tr>
+	  		<tr>
 				<td align="right">E-Mail:</td>
 				<td align="left">${loggedCustomer.email}
 				<input type="hidden" name="email" value="${loggedCustomer.email}"/></td>

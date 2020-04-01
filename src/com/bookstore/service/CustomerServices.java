@@ -83,7 +83,7 @@ public class CustomerServices {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		String city = request.getParameter("city");
-		String zipCode = request.getParameter("zipCode");
+		String zipCode = request.getParameter("zipcode");
 		String country = request.getParameter("country");
 		
 		if (email != null && !email.equals("")) {
