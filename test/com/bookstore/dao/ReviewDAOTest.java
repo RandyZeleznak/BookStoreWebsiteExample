@@ -42,19 +42,20 @@ public class ReviewDAOTest {
 
 	@Test
 	void testCreateReview() {
+		
 		Review review = new Review();
 		Book book = new Book();
-		book.setBookId(2);
+		book.setBookId(7);
 		
 		Customer customer =  new Customer();
-		customer.setCustomerId(5);
+		customer.setCustomerId(3);
 		
 		review.setBook(book);
 		review.setCustomer(customer);
 		
-		review.setHeadline("This is a really good book!");
+		review.setHeadline("This is an awful  book!");
 		review.setRating(1);
-		review.setComment("I have just read this book.  It is Wonderful.");
+		review.setComment("I have just read this book. Terrible.");
 		
 		Review savedReview = reviewDao.create(review);
 		
@@ -72,7 +73,7 @@ public class ReviewDAOTest {
 	
 	@Test
 	void testDeleteReview() {
-		int reviewId = 0;
+		int reviewId = 2;
 		reviewDao.delete(reviewId);
 		
 		Review review = reviewDao.get(reviewId);
@@ -107,4 +108,37 @@ public class ReviewDAOTest {
 		assertTrue(totalReviews > 0);
 	}
 
+	@Test
+	public void testFindByCustomerAndBookNotFound() {
+		Integer customerId = 100;
+		Integer bookId = 99;
+		
+		Review result = reviewDao.findByCustomerAndBook(customerId, bookId);
+		
+		assertNull(result);
+	}
+	
+	@Test
+	public void testFindByCustomerAndBookFound() {
+		Integer customerId = 7;
+		Integer bookId = 7;
+		
+		Review result = reviewDao.findByCustomerAndBook(customerId, bookId);
+		
+		assertNotNull(result);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
