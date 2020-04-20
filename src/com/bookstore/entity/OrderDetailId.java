@@ -13,9 +13,8 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class OrderDetailId implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
+	
+	
 	private Book book;
 	private BookOrder bookOrder;
 	
@@ -84,9 +83,3 @@ public class OrderDetailId implements java.io.Serializable {
 
 	
 
-
-	
-
-
-
-}

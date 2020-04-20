@@ -44,19 +44,17 @@ public class OrderDAOTest {
 		
 		Book book = new Book(2);
 		orderDetail.setBook(book);
-
-		
-		OrderDetailId orderDetailId = new OrderDetailId();
-//		orderDetailId.setQuantity(2);
-//		orderDetailId.setSubtotal(79.98f);
+		orderDetail.setQuantity(2);
+		orderDetail.setSubtotal(79.98f);
+		orderDetail.setBookOrder(order);
 		
 		orderDetails.add(orderDetail);
 		
 		order.setOrderDetails(orderDetails);
 		
-		BookOrder savedOrder = orderDAO.create(order);
+		orderDAO.create(order);
 		
-		assertTrue(savedOrder != null && savedOrder.getOrderDetails().size() > 0);
+		assertTrue(order.getOrderId() > 0);
 		
 	}
 
