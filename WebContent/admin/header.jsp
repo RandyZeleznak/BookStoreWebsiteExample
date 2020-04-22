@@ -31,7 +31,7 @@
 				<img src="../images/reviews.png" width="40" height="50"/><br/>Reviews</a>
 		</div>
 		<div>
-			<a href="orders">
+			<a href="list_orders">
 				<img src="../images/orders.png" width="30" height="30"/><br/>Orders</a>
 		</div>
 		</div>

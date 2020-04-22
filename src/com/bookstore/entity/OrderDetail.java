@@ -71,6 +71,7 @@ public class OrderDetail implements java.io.Serializable {
 
 	public void setBookOrder(BookOrder bookOrder) {
 		this.bookOrder = bookOrder;
+		this.id.setBookOrder(bookOrder);
 	}
 	
 	@Column(name = "quantity", nullable = false)
