@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,6 @@
 	<title>Bookstore Manage Orders Administration Page</title>
 	<link rel="stylesheet" href="../css/style.css">
 	<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 
@@ -44,8 +44,17 @@
 			<c:forEach var="order" items="${listOrder}" varStatus="status">
 			<tr>
 				<td>${status.index + 1}</td>
+				<td>${order.orderId}</td>
+				<td>${order.customer.fullName}</td>
+				<td>${order.bookCopies}</td>
+				<td><fmt:formatNumber value="${order.orderTotal}" type="currency"/></td>
+				<td>${order.paymentMethod}</td>
+				<td>${order.orderStatus}</td>
+				<td>${order.orderDate}</td>
+				
 				
 				<td> 
+					<a href="view_order?id=${order.orderId}">Details</a> &nbsp
 					<a href="edit_review?id=${review.reviewId}">Edit</a> &nbsp
 					<a href="javascript:void(0);" class="deleteLink" id="${review.reviewId}">Delete</a>
 				</td>

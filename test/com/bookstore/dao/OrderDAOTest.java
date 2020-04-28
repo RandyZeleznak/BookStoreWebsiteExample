@@ -39,7 +39,7 @@ public class OrderDAOTest {
 		order.setCustomer(customer);
 		order.setRecipientName("Joe Bonamassa");
 		order.setRecipientPhone("123456789");
-		order.setShippingAdress("123 Broadway, New York, NY");
+		order.setShippingAddress("123 Broadway, New York, NY");
 		
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();
@@ -69,7 +69,7 @@ public class OrderDAOTest {
 		order.setCustomer(customer);
 		order.setRecipientName("Joe Bonamassa");
 		order.setRecipientPhone("123456789");
-		order.setShippingAdress("123 Broadway, New York, NY");
+		order.setShippingAddress("123 Broadway, New York, NY");
 		
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();
@@ -94,13 +94,13 @@ public class OrderDAOTest {
 	public void testUpdateBookOrderShippingAddress() {
 		Integer orderId = 9;
 		BookOrder order = orderDAO.get(orderId);
-		order.setShippingAdress("New Shipping Address");
+		order.setShippingAddress("New Shipping Address");
 		
 		orderDAO.update(order);
 		
 		BookOrder updatedOrder = orderDAO.get(orderId);
 		
-		assertEquals(order.getShippingAdress(), updatedOrder.getShippingAdress());
+		assertEquals(order.getShippingAddress(), updatedOrder.getShippingAddress());
 	}
 	
 	@Test
@@ -121,7 +121,7 @@ public class OrderDAOTest {
 		
 		orderDAO.update(order);
 		
-		BookOrder updatedOrder = orderDAO.get(orderId);
+		//BookOrder updatedOrder = orderDAO.get(orderId);
 		
 		iterator = order.getOrderDetails().iterator();
 		
@@ -144,25 +144,7 @@ public class OrderDAOTest {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	
 	@Test
@@ -171,7 +153,7 @@ public class OrderDAOTest {
 		BookOrder order = orderDAO.get(orderId);
 		System.out.println(order.getRecipientName());
 		System.out.println(order.getRecipientPhone());
-		System.out.println(order.getShippingAdress());
+		System.out.println(order.getShippingAddress());
 		System.out.println(order.getOrderStatus());
 		System.out.println(order.getOrderTotal());
 		System.out.println(order.getPaymentMethod());
@@ -214,6 +196,19 @@ public class OrderDAOTest {
 		
 		assertTrue(listOrders.size() > 0);
 	}
+	
+	
+	@Test
+	public void testListByCustomerNoOrders() {
+		Integer customerId = 99;
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
+		
+		assertTrue(listOrders.isEmpty());
+	}
+	
+	
+	
+	
 
 	@Test
 	public void testCount() {
