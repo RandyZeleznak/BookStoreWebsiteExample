@@ -34,7 +34,7 @@ public class OrderDAOTest {
 	public void testCreateBookOrder() {
 		BookOrder order = new BookOrder();
 		Customer customer = new Customer();
-		customer.setCustomerId(3);
+		customer.setCustomerId(46);
 		
 		order.setCustomer(customer);
 		order.setRecipientName("Joe Bonamassa");
@@ -204,6 +204,14 @@ public class OrderDAOTest {
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
 		
 		assertTrue(listOrders.isEmpty());
+	}
+	
+	@Test
+	public void testListByCustomerWithOrders() {
+		Integer customerId = 35;
+		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
+		
+		assertTrue(listOrders.size() > 0);
 	}
 	
 	
