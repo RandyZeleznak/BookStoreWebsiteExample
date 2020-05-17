@@ -34,7 +34,7 @@ public class OrderDAOTest {
 	public void testCreateBookOrder() {
 		BookOrder order = new BookOrder();
 		Customer customer = new Customer();
-		customer.setCustomerId(46);
+		customer.setCustomerId(7);
 		
 		order.setCustomer(customer);
 		order.setRecipientName("Joe Bonamassa");
@@ -161,6 +161,26 @@ public class OrderDAOTest {
 		
 		assertEquals(1,order.getOrderDetails().size());
 	}
+	
+	@Test
+	public void testGetByIdAndCustomerNull() {
+		Integer orderId = 10;
+		Integer customerId = 99;
+		
+		BookOrder order = orderDAO.get(orderId, customerId);
+		
+		assertNull(order);
+	}
+	
+	@Test
+	public void testGetByIdAndCustomerNotNull() {
+		Integer orderId = 8;
+		Integer customerId = 3;
+		
+		BookOrder order = orderDAO.get(orderId, customerId);
+		
+		assertNotNull(order);
+	}
 
 	@Test
 	public void testDeleteOrder() {
@@ -208,7 +228,7 @@ public class OrderDAOTest {
 	
 	@Test
 	public void testListByCustomerWithOrders() {
-		Integer customerId = 35;
+		Integer customerId = 6;
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
 		
 		assertTrue(listOrders.size() > 0);

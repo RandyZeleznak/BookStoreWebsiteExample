@@ -24,7 +24,7 @@ public class ListOrderServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		OrderServices orderServices = new OrderServices(request, response);
-		orderServices.ListAllOrder();
+		orderServices.listOrder();
 	}
 
 }

@@ -24,7 +24,7 @@ public class CustomerLoginFilter implements Filter {
 
 	private static final String[] LoginRequiredURLS = {
 			"/view_profile","/edit_profile","/update_profile","/write_review",
-			"checkout","place_order"
+			"/checkout","/place_order", "/view_order","/show_order_detail"
 	};
     
     public CustomerLoginFilter() {
