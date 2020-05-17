@@ -192,7 +192,7 @@ public class OrderServices {
 
 
 
-	public void updateOrder() {
+	public void updateOrder() throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		BookOrder order = (BookOrder) session.getAttribute("order");
 		
@@ -212,7 +212,7 @@ public class OrderServices {
 		String[] arrayPrice = request.getParameterValues("price");
 		String[] arrayQuantity = new String[arrayBookId.length];
 		
-		if(int i = 1; i <= arrayQuantity.length; i++) {
+		for(int i = 1; i <= arrayQuantity.length; i++) {
 			arrayQuantity[i] = request.getParameter("quantity" + i);
 		}
 		
@@ -234,7 +234,7 @@ public class OrderServices {
 			orderDetail.setSubtotal(subtotal);
 			orderDetail.setBookOrder(order);
 			
-			orderDetail.add(orderDetail);
+			orderDetails.add(orderDetail);
 			
 			totalAmount += subtotal;
 		}
