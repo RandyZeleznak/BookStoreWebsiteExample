@@ -212,8 +212,8 @@ public class OrderServices {
 		String[] arrayPrice = request.getParameterValues("price");
 		String[] arrayQuantity = new String[arrayBookId.length];
 		
-		for(int i = 1; i <= arrayQuantity.length; i++) {
-			arrayQuantity[i] = request.getParameter("quantity" + i);
+		for(int i = 1 ; i <= arrayQuantity.length; i++) {
+			arrayQuantity[i - 1] = request.getParameter("quantity" + i);
 		}
 		
 		Set<OrderDetail> orderDetails = order.getOrderDetails();

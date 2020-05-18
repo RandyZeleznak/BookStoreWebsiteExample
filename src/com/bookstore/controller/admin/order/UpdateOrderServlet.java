@@ -12,7 +12,7 @@ import com.bookstore.service.OrderServices;
 /**
  * Servlet implementation class for admin to Update an Order
  */
-@WebServlet("/ admin/update_order")
+@WebServlet("/admin/update_order")
 public class UpdateOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
