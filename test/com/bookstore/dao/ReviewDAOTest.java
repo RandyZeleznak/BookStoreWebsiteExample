@@ -129,7 +129,12 @@ public class ReviewDAOTest {
 	}
 	
 	
-	
+	@Test 
+	public void testListMostRecent() {
+		List<Review> recentReviews = reviewDao.listMostRecentReviews();
+		
+		assertEquals(3, recentReviews.size());
+	}
 	
 	
 	

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bookstore.entity.Book;
 import com.bookstore.entity.BookOrder;
 import com.bookstore.entity.Customer;
 
@@ -72,5 +73,11 @@ public class OrderDAO extends JpaDAO<BookOrder> implements GenericDAO<BookOrder>
 	public List<BookOrder> listByCustomer(Integer customerId){
 		return super.findWithNamedQuery("BookOrder.findByCustomer", "customerId", customerId);
 	}
+	public List<BookOrder> listMostRecentSales(){
+		return super.findWithNamedQuery("BookOrder.findAll", 0, 3);
+	}
+	
+	
+	
 
 }

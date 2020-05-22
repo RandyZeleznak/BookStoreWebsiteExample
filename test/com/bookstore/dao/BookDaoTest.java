@@ -212,6 +212,28 @@ public class BookDaoTest {
 	}
 	
 	@Test
+	public void testListBestSellingBooks() {
+		List<Book> topSellingBooks = bookDao.listBestSellingBooks();
+		
+		for(Book book: topSellingBooks) {
+			System.out.println(book.getTitle());
+		}
+		
+		assertEquals(3, topSellingBooks.size());
+	}
+	
+	@Test
+	public void testListMostFavoriteBooks() {
+		List<Book> topFavoriteBooks = bookDao.listMostFavoriteBooks();
+		
+		for(Book book: topFavoriteBooks) {
+			System.out.println(book.getTitle());
+		}
+		
+		assertEquals(2, topFavoriteBooks.size());
+	}
+	
+	@Test
 	public void testSeachBookInTitle() {
 		String keyword = "Java";
 		List<Book> result = bookDao.search(keyword);

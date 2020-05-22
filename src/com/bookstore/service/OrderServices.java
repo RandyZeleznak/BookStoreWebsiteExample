@@ -216,14 +216,19 @@ public class OrderServices {
 			arrayQuantity[i - 1] = request.getParameter("quantity" + i);
 		}
 		
+		System.out.println("BookId Length= " +arrayBookId.length);
+		
 		Set<OrderDetail> orderDetails = order.getOrderDetails();
 		orderDetails.clear();
 		
 		float totalAmount = 0.0f;
+		System.out.println("Price = " +request.getParameterValues("price"));
 		
 		for(int i = 0; i < arrayBookId.length; i++) {
 			int bookId = Integer.parseInt(arrayBookId[i]);
 			int quantity = Integer.parseInt(arrayQuantity[i]);
+			System.out.println("Inside for");
+			System.out.println("ArrayPrice = " +arrayPrice[i]);
 			float price = Float.parseFloat(arrayPrice[i]);
 			
 			float subtotal = price * quantity;
@@ -246,6 +251,16 @@ public class OrderServices {
 		String message = "the order" + order.getOrderId() + "has been updated successfully";
 		
 		listOrder(message);
+	}
+
+
+	public void deleteOrder() throws ServletException, IOException {
+		Integer orderId =Integer.parseInt(request.getParameter("id"));
+		orderDao.delete(orderId);
+		
+		String message = "The Order ID " +orderId+ " has been deleted.";
+		listOrder(message);
+		
 	}
 
 }
