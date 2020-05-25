@@ -92,7 +92,7 @@ public class ReviewDAOTest {
 		
 		for (Review review : listReview) {
 			System.out.println(review.getReviewId() + " - " + review.getBook().getTitle()
-					+ " - " + review.getCustomer().getFullName()
+					+ " - " + review.getCustomer().getFirstName()
 					+ " - " + review.getHeadline() + " - " + review.getRating());
 		}
 		

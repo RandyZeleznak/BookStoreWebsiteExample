@@ -1,7 +1,11 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,21 +55,27 @@ public class CustomerServices {
 			String message = "Could not create new customer: the email " +email+ " already registered by another customer.";
 			listCustomers(message);
 		} else {
-			String fullName = request.getParameter("fullName");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			String address1 = request.getParameter("addressLine1");
+			String address2 = request.getParameter("addressLine2");
 			String city = request.getParameter("city");
+			String state = request.getParameter("state");
 			String zipcode = request.getParameter("zipcode");
 			String country = request.getParameter("country");
 			
 			Customer newCustomer = new Customer();
 			newCustomer.setEmail(email);
-			newCustomer.setFullName(fullName);
+			newCustomer.setFirstName(firstName);
+			newCustomer.setLastName(lastName);
 			newCustomer.setPassword(password);
 			newCustomer.setPhone(phone);
-			newCustomer.setAddress(address);
+			newCustomer.setAddressLine1(address1);
+			newCustomer.setAddressLine2(address2);
 			newCustomer.setCity(city);
+			newCustomer.setState(state);
 			newCustomer.setZipcode(zipcode);
 			newCustomer.setCountry(country);
 			
@@ -79,11 +89,14 @@ public class CustomerServices {
 	}
 	private void updateCustomerFieldsFromForm(Customer customer) {
 		String email = request.getParameter("email");
-		String fullName = request.getParameter("fullName");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		String addressLine1 = request.getParameter("addressLine1");
+		String addressLine2 = request.getParameter("addressLine2");
 		String city = request.getParameter("city");
+		String state = request.getParameter("state");
 		String zipCode = request.getParameter("zipcode");
 		String country = request.getParameter("country");
 		
@@ -92,15 +105,18 @@ public class CustomerServices {
 		}
 
 		System.out.println("Email = " +email);
-		customer.setFullName(fullName);
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
 		
 		if (password != null && !password.equals("")) {
 			customer.setPassword(password);
 		}
 		
 		customer.setPhone(phone);
-		customer.setAddress(address);
+		customer.setAddressLine1(addressLine1);
+		customer.setAddressLine2(addressLine2);
 		customer.setCity(city);
+		customer.setState(state);
 		customer.setZipcode(zipCode);
 		customer.setCountry(country);		
 	}
@@ -114,21 +130,27 @@ public class CustomerServices {
 			message = "Could not register you as a new customer with email " +email+ " already registered by another customer.";
 			
 		} else {
-			String fullName = request.getParameter("fullName");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			String addressLine1 = request.getParameter("addressLine1");
+			String addressLine2 = request.getParameter("addressLine2");
 			String city = request.getParameter("city");
+			String state = request.getParameter("state");
 			String zipcode = request.getParameter("zipcode");
 			String country = request.getParameter("country");
 			
 			Customer newCustomer = new Customer();
 			newCustomer.setEmail(email);
-			newCustomer.setFullName(fullName);
+			newCustomer.setFirstName(firstName);
+			newCustomer.setLastName(lastName);
 			newCustomer.setPassword(password);
 			newCustomer.setPhone(phone);
-			newCustomer.setAddress(address);
+			newCustomer.setAddressLine1(addressLine1);
+			newCustomer.setAddressLine2(addressLine2);
 			newCustomer.setCity(city);
+			newCustomer.setState(state);
 			newCustomer.setZipcode(zipcode);
 			newCustomer.setCountry(country);
 			
@@ -167,22 +189,28 @@ public class CustomerServices {
 		if(customerByEmail != null && customerByEmail.getCustomerId() != customerId) {
 			message = "could not update the customer ID " +customerId+ " because there's an existing customer having the same email.";
 		} else {
-			String fullName = request.getParameter("fullName");
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
+			String addressLine1 = request.getParameter("addressLine1");
+			String addressLine2 = request.getParameter("addressLine2");
 			String city = request.getParameter("city");
+			String state = request.getParameter("state");
 			String zipcode = request.getParameter("zipcode");
 			String country = request.getParameter("country");
 			
 			Customer customerById = customerDAO.get(customerId);
 			customerById.setCustomerId(customerId);
 			customerById.setEmail(email);
-			customerById.setFullName(fullName);
+			customerById.setFirstName(firstName);
+			customerById.setLastName(lastName);
 			customerById.setPassword(password);
 			customerById.setPhone(phone);
-			customerById.setAddress(address);
+			customerById.setAddressLine1(addressLine1);
+			customerById.setAddressLine2(addressLine2);
 			customerById.setCity(city);
+			customerById.setState(state);
 			customerById.setZipcode(zipcode);
 			customerById.setCountry(country);
 			
@@ -256,6 +284,25 @@ public class CustomerServices {
 	customerDAO.update(customer);
 	showCustomerProfile();
 	
+	}
+
+	public void newCustomer() throws ServletException, IOException {
+		String[] countryCodes = Locale.getISOCountries();
+		Map<String, String> mapCountries = new TreeMap<>();
+		
+		for(String countryCode : countryCodes) {
+			Locale locale = new Locale("", countryCode);
+			String code = locale.getCountry();
+			String name = locale.getDisplayCountry();
+			
+			mapCountries.put(name, code);
+		}
+		
+		request.setAttribute("mapCountries", mapCountries);
+		
+		String customerForm = "customer_form.jsp";
+		request.getRequestDispatcher(customerForm).forward(request, response);
+		
 	}
 	
 

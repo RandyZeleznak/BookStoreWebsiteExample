@@ -26,11 +26,12 @@ public class CustomerDAOTest {
 	@Test
 	public void testCreateCustomer() {
 		Customer customer = new Customer();
-		customer.setEmail("Bobby@gmail.com");
-		customer.setFullName("Robert Plant");
+		customer.setEmail("Bobby@Plant.com");
+		customer.setFirstName("Robert");
+		customer.setLastName("Plant");
 		customer.setCity("London");
 		customer.setCountry("England");
-		customer.setAddress("330 B 16 Manchester Blvd");
+		customer.setAddressLine1("330 B 16 Manchester Blvd");
 		customer.setPassword("password");
 		customer.setPhone("116467861234");
 		customer.setZipcode("123-54378");
@@ -43,7 +44,7 @@ public class CustomerDAOTest {
 
 	@Test
 	public void testGet() {
-		Integer customerId = 1;
+		Integer customerId = 8;
 		Customer customer = customerDao.get(customerId);
 		
 		assertNotNull(customer);
@@ -52,12 +53,14 @@ public class CustomerDAOTest {
 	@Test
 	public void testUpdateCustomer() {
 		Customer customer = customerDao.get(1);
-		String fullName = "Tom Sawyer";
-		customer.setFullName(fullName);
+		String firstName = "Tom";
+		String lastName = "Sawyer";
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
 		
 		Customer updatedCustomer = customerDao.update(customer);
 		
-		assertTrue(updatedCustomer.getFullName().equals(fullName));
+		assertTrue(updatedCustomer.getFirstName().equals(firstName));
 	}
 
 	@Test
@@ -74,7 +77,7 @@ public class CustomerDAOTest {
 		List <Customer> listCustomers = customerDao.listAll();
 		
 		for(Customer customer: listCustomers) {
-			System.out.println(customer.getFullName());
+			System.out.println(customer.getFirstName());
 		}
 		
 		assertFalse(listCustomers.isEmpty());

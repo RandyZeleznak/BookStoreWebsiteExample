@@ -42,8 +42,12 @@
 				<td align="left"><input type="text" id="email" name="email" size="20" value="${customer.email}" /></td>
 			</tr>
 			<tr>
-				<td align="right">Full Name:</td>
-				<td align="left"><input type="text" id="fullName" name="fullName" size="30" value="${customer.fullName}" /></td>
+				<td align="right">First Name:</td>
+				<td align="left"><input type="text" id="firstName" name="firstName" size="30" value="${customer.firstName}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Last Name:</td>
+				<td align="left"><input type="text" id="lastName" name="lastName" size="30" value="${customer.lastName}" /></td>
 			</tr>
 			<tr>
 				<td align="right">Password :</td>
@@ -58,12 +62,20 @@
 				<td align="left"><input type="text" id="phone" name="phone" size="15" value="${customer.phone}" /></td>
 			</tr>
 			<tr>
-				<td align="right">Address:</td>
-				<td align="left"><input type="text" id="address" name="address" size="30" value="${customer.address}"/></td>
+				<td align="right">Address Line 1:</td>
+				<td align="left"><input type="text" id="addressLine1" name="addressLine1" size="30" value="${customer.addressLine1}"/></td>
+			</tr>
+			<tr>
+				<td align="right">Address Line 2:</td>
+				<td align="left"><input type="text" id="addressLine2" name="addressLIne2" size="30" value="${customer.addressLine2}"/></td>
 			</tr>
 			<tr>
 				<td align="right">City:</td>
 				<td align="left"><input type="text" id="city" name="city" size="20" value="${customer.city}"/></td>
+			</tr>
+			<tr>
+				<td align="right">State:</td>
+				<td align="left"><input type="text" id="state" name="state" size="20" value="${customer.state}"/></td>
 			</tr>
 			<tr>
 				<td align="right">Zip Code:</td>
@@ -71,7 +83,12 @@
 			</tr>
 			<tr>
 				<td align="right">Country:</td>
-				<td align="left"><input type="text" id="country" name="country" size="20" value="${customer.country}"/></td>
+				<td align="left">
+					<select name="country" id="country">
+					<c:forEach items="${mapCountries}" var="country">
+						<option value="${country.value}">${country.key}</option>
+					</c:forEach>
+					</select>
 			</tr>
 			
 				
@@ -98,15 +115,17 @@
 					required: true,
 					email: true
 				},
-				fullName: "required",
+				firstName: "required",
+				lastName: "required",
 				password: "required",
 				confirmPassword: {
 					required: true,
 					equalTo: "#password"
 				},
 				phone: "required",
-				address: "required",
+				addressLine1: "required",
 				city:"required",
+				state:"required",
 				zipcode: "required",
 				country:"required",
 			},
@@ -117,15 +136,17 @@
 					required: "Please enter an e-mail address",
 					email: "Please enter a valid e-mail address"
 					},
-				fullName: "Please enter Full Name",
+				firstName: "Please enter First Name",
+				lastName: "Please enter Last Name",
 				password: "Please confirm Password",
 				confirmPassword: {
 					required: "Please enter Password",
 					equalTo: "Confirm password does not math password"
 				},
-				phone: "Please enter phone",
-				address: "please enter address",
+				phone: "Please enter phone number ",
+				addressLine1: "please enter street address",
 				city:"please enter city",
+				state:"please enter state or province",
 				zipcode: "please enter zipcode",
 				country:"please enter country",
 			}
