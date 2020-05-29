@@ -20,8 +20,12 @@
 		<td>${loggedCustomer.email}</td>
 	</tr>
 	<tr>
-		<td><b>Full Name: </b></td>
-		<td>${loggedCustomer.fullName }
+		<td><b>First Name: </b></td>
+		<td>${loggedCustomer.firstName }
+	</tr>
+	<tr>
+		<td><b>Last Name: </b></td>
+		<td>${loggedCustomer.lastName }
 	</tr>
 	<tr>
 		<td><b> Phone Number:  </b></td>
@@ -29,11 +33,19 @@
 	</tr>
 	<tr>
 		<td><b>Address: </b></td>
-		<td>${loggedCustomer.address }
+		<td>${loggedCustomer.addressLine1 }
+	</tr>
+	<tr>
+		<td><b>Address Line2: </b></td>
+		<td>${loggedCustomer.addressLine2 }
 	</tr>
 	<tr>
 		<td><b>City: </b></td>
 		<td>${loggedCustomer.city }
+	</tr>
+	<tr>
+		<td><b>State: </b></td>
+		<td>${loggedCustomer.state }
 	</tr>
 	<tr>
 		<td><b>Country: </b></td>

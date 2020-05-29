@@ -20,6 +20,7 @@ import com.bookstore.entity.OrderDetailId;
 public class OrderDAOTest {
 
 	private static OrderDAO orderDAO;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		orderDAO = new OrderDAO();
@@ -34,151 +35,156 @@ public class OrderDAOTest {
 	public void testCreateBookOrder() {
 		BookOrder order = new BookOrder();
 		Customer customer = new Customer();
-		customer.setCustomerId(7);
-		
+		customer.setCustomerId(11);
+
 		order.setCustomer(customer);
-		order.setRecipientName("Joe Bonamassa");
-		order.setRecipientPhone("123456789");
-		order.setShippingAddress("123 Broadway, New York, NY");
-		
+		order.setFirstName("Joe");
+		order.setLastName("Bonamassa");
+		order.setPhone("123456789");
+		order.setAddressLine1("123 Broadway");
+		order.setAddressLine2(" ");
+		order.setCity("New York");
+		order.setState("NY");
+		order.setCountry("US");
+		order.setZipcode("50103");
+		order.setPaymentMethod("paypal");
+			
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();
-		
-		Book book = new Book(2);
+
+		Book book = new Book(9);
 		orderDetail.setBook(book);
 		orderDetail.setQuantity(2);
-		orderDetail.setSubtotal(79.98f);
+		orderDetail.setSubtotal(66.58f);
 		orderDetail.setBookOrder(order);
-		
+
 		orderDetails.add(orderDetail);
-		
+
 		order.setOrderDetails(orderDetails);
-		
+		order.setTax(6.65f);
+		order.setShippingFee(2.0f);
+		order.setOrderSubTotal(66.58f);
+		order.setOrderTotal(75.23f);;
+
 		orderDAO.create(order);
-		
+
 		assertTrue(order.getOrderId() > 0);
-		
+
 	}
-	
+
 	@Test
 	public void testCreateBookOrder2() {
 		BookOrder order = new BookOrder();
 		Customer customer = new Customer();
 		customer.setCustomerId(3);
-		
+
 		order.setCustomer(customer);
-		order.setRecipientName("Joe Bonamassa");
-		order.setRecipientPhone("123456789");
-		order.setShippingAddress("123 Broadway, New York, NY");
-		
+		order.setFirstName("Joe Bonamassa");
+		order.setPhone("123456789");
+		order.setAddressLine1("123 Broadway, New York, NY");
+
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();
-		
+
 		Book book = new Book(4);
 		orderDetail.setBook(book);
 		orderDetail.setQuantity(1);
 		orderDetail.setSubtotal(39.99f);
 		orderDetail.setBookOrder(order);
-		
+
 		orderDetails.add(orderDetail);
-		
+
 		order.setOrderDetails(orderDetails);
-		
+
 		orderDAO.create(order);
-		
+
 		assertTrue(order.getOrderId() > 0);
-		
+
 	}
 
 	@Test
 	public void testUpdateBookOrderShippingAddress() {
 		Integer orderId = 9;
 		BookOrder order = orderDAO.get(orderId);
-		order.setShippingAddress("New Shipping Address");
-		
+		order.setAddressLine1("New Shipping Address");
+
 		orderDAO.update(order);
-		
+
 		BookOrder updatedOrder = orderDAO.get(orderId);
-		
-		assertEquals(order.getShippingAddress(), updatedOrder.getShippingAddress());
+
+		assertEquals(order.getAddressLine1(), updatedOrder.getAddressLine1());
 	}
-	
+
 	@Test
 	public void testUpdateBookOrderDetail() {
-		Integer orderId = 9;
+		Integer orderId =30;
 		BookOrder order = orderDAO.get(orderId);
-		
+
 		Iterator<OrderDetail> iterator = order.getOrderDetails().iterator();
-		
+
 		while (iterator.hasNext()) {
 			OrderDetail orderDetail = iterator.next();
-			if (orderDetail.getBook().getBookId() == 4) {
-				orderDetail.setQuantity(2);
-				orderDetail.setSubtotal(79.98f);
+			if (orderDetail.getBook().getBookId() == 9) {
+				orderDetail.setQuantity(3);
+				orderDetail.setSubtotal(99.87f);
 			}
 		}
-			
-		
+
 		orderDAO.update(order);
-		
-		//BookOrder updatedOrder = orderDAO.get(orderId);
-		
+
+		// BookOrder updatedOrder = orderDAO.get(orderId);
+
 		iterator = order.getOrderDetails().iterator();
-		
-		int expectedQuantity = 2;
-		float expectedSubtotal = 79.98f;
+
+		int expectedQuantity = 3;
+		float expectedSubtotal = 99.87f;
 		int actualQuantity = 0;
 		float actualSubtotal = 0;
-		
+
 		while (iterator.hasNext()) {
 			OrderDetail orderDetail = iterator.next();
-			if (orderDetail.getBook().getBookId() == 4) {
+			if (orderDetail.getBook().getBookId() == 9) {
 				actualQuantity = orderDetail.getQuantity();
 				actualSubtotal = orderDetail.getSubtotal();
 			}
-		}		
-		
+		}
+
 		assertEquals(expectedQuantity, actualQuantity);
 		assertEquals(expectedSubtotal, actualSubtotal, 0.0f);
-		
+
 	}
-	
-	
-		
-	
-	
+
 	@Test
 	public void testGet() {
 		Integer orderId = 8;
 		BookOrder order = orderDAO.get(orderId);
-		System.out.println(order.getRecipientName());
-		System.out.println(order.getRecipientPhone());
-		System.out.println(order.getShippingAddress());
+		System.out.println(order.getFirstName());
+		System.out.println(order.getPhone());
+		System.out.println(order.getAddressLine1());
 		System.out.println(order.getOrderStatus());
 		System.out.println(order.getOrderTotal());
 		System.out.println(order.getPaymentMethod());
-		
-		
-		assertEquals(1,order.getOrderDetails().size());
+
+		assertEquals(1, order.getOrderDetails().size());
 	}
-	
+
 	@Test
 	public void testGetByIdAndCustomerNull() {
 		Integer orderId = 10;
 		Integer customerId = 99;
-		
+
 		BookOrder order = orderDAO.get(orderId, customerId);
-		
+
 		assertNull(order);
 	}
-	
+
 	@Test
 	public void testGetByIdAndCustomerNotNull() {
 		Integer orderId = 8;
 		Integer customerId = 3;
-		
+
 		BookOrder order = orderDAO.get(orderId, customerId);
-		
+
 		assertNotNull(order);
 	}
 
@@ -186,9 +192,9 @@ public class OrderDAOTest {
 	public void testDeleteOrder() {
 		int orderId = 9;
 		orderDAO.delete(orderId);
-		
+
 		BookOrder order = orderDAO.get(orderId);
-		
+
 		assertNull(order);
 	}
 
@@ -200,58 +206,49 @@ public class OrderDAOTest {
 	@Test
 	public void testListAll() {
 		List<BookOrder> listOrders = orderDAO.listAll();
-		
-		for( BookOrder order: listOrders) {
-			System.out.println(order.getOrderId() + " " + order.getCustomer().getFirstName() + " " 
-		+ " " + order.getOrderTotal() + " " + order.getOrderStatus()) ; 
-			
-			for(OrderDetail detail : order.getOrderDetails()) {
+
+		for (BookOrder order : listOrders) {
+			System.out.println(order.getOrderId() + " " + order.getCustomer().getFirstName() + " " + " "
+					+ order.getOrderTotal() + " " + order.getOrderStatus());
+
+			for (OrderDetail detail : order.getOrderDetails()) {
 				Book book = detail.getBook();
 				int quantity = detail.getQuantity();
 				float subtotal = detail.getSubtotal();
 				System.out.println("\t" + book.getTitle() + " - " + quantity + " - " + subtotal);
 			}
 		}
-		
-		
+
 		assertTrue(listOrders.size() > 0);
 	}
-	
-	
+
 	@Test
 	public void testListByCustomerNoOrders() {
 		Integer customerId = 99;
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
-		
+
 		assertTrue(listOrders.isEmpty());
 	}
-	
+
 	@Test
 	public void testListByCustomerWithOrders() {
 		Integer customerId = 6;
 		List<BookOrder> listOrders = orderDAO.listByCustomer(customerId);
-		
+
 		assertTrue(listOrders.size() > 0);
 	}
-	
-	
-	
-	
 
 	@Test
 	public void testCount() {
 		long totalOrders = orderDAO.count();
 		assertEquals(2, totalOrders);
 	}
-	
+
 	@Test
 	public void testListMostRecentSales() {
 		List<BookOrder> recentOrders = orderDAO.listMostRecentSales();
-		
+
 		assertEquals(3, recentOrders.size());
 	}
-	
-	
-	
 
 }

@@ -16,7 +16,7 @@
 	<div align="center">
 	<div>
 	<h2 class="pageheading"> Customer Management Dashboard</h2>
-	<h3> <a href="customer_form.jsp">Create New Customer</a> </h3>
+	<h3> <a href="new_customer">Create New Customer</a> </h3>
 	
 	<br/><br>
 	</div>
@@ -50,7 +50,7 @@
 				<td>${customer.firstName}</td>
 				<td>${customer.lastName}</td>
 				<td>${customer.city}</td>
-				<td>${customer.country}</td>
+				<td>${customer.countryName}</td>
 				<td>${customer.registerDate}</td>
 				
 				<td> 
