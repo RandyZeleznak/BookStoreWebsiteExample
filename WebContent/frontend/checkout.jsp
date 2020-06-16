@@ -60,41 +60,60 @@
 							</c:forEach>
 							
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><b>${cart.totalQuantity} book(s)</b></td>
-								<td>Total:</td>
-								<td colspan="2"><fmt:formatNumber value="${cart.totalAmount}" type="currency"/></td>
+								<td colspan="7" align="right">
+									<p>Number of Copies: ${cart.totalQuantity}</p>
+									<p>Subtotal: <fmt:formatNumber value="${cart.totalAmount}" type="currency"/></p>
+									<p>Tax: <fmt:formatNumber value="${tax}" type="currency"/></p> 
+									<p>Shipping Fee: <fmt:formatNumber value="${shippingFee}" type="currency"/></p>
+									<p>TOTAL: <fmt:formatNumber value="${total}" type="currency"/></p>
 							</tr>
 						</table>
 						<h2> Your shipping Information </h2>
 							<form id="orderForm" action="place_order" method="post">
 								<table>
+			 					<tr>
+									<td> Recipient First Name: </td>
+									<td><input type="text" name="firstName" value="${loggedCustomer.firstName}"/></td>
+								</tr>
 								<tr>
-									<td> Recipient Name: </td>
-									<td><input type="text" name="recipientName" value="${loggedCustomer.fullName}"/></td>
+									<td> Recipient Last Name: </td>
+									<td><input type="text" name="lastName" value="${loggedCustomer.lastName}"/></td>
 								</tr>
 								<tr>
 									<td> Recipient Phone: </td>
-									<td><input type="text" name="recipientPhone" value="${loggedCustomer.phone}"/></td>
+									<td><input type="text" name="phone" value="${loggedCustomer.phone}"/></td>
 								</tr>
 								<tr>
 									<td> Address: </td>
-									<td><input type="text" name="address" value="${loggedCustomer.address}"/></td>
+									<td><input type="text" name="addressLine1" value="${loggedCustomer.addressLine1}"/></td>
+								</tr>
+								<tr>
+									<td> Address Line2: </td>
+									<td><input type="text" name="addressLine2" value="${loggedCustomer.addressLine2}"/></td>
 								</tr>
 								<tr>
 									<td> City: </td>
 									<td><input type="text" name="city" value="${loggedCustomer.city}"/></td>
 								</tr>
 								<tr>
+									<td> State: </td>
+									<td><input type="text" name="state" value="${loggedCustomer.state}"/></td>
+								</tr>
+								<tr>
 									<td> Country: </td>
-									<td><input type="text" name="country" value="${loggedCustomer.country}"/></td>
+									<td>
+										<select name="country" id="country">
+										<c:forEach items="${mapCountries}" var="country">
+											<option value="${country.value}" <c:if test="${loggedCustomer.country eq country.value}">selected='selected'</c:if> >${country.key}</option>
+										</c:forEach>
+										</select>
+									</td>
 								</tr>
 								<tr>
 									<td> Zip Code: </td>
 									<td><input type="text" name="zipcode" value="${loggedCustomer.zipcode}"/></td>
 								</tr>
+									
 								</table>
 								<div>
 									<h2> Payment </h2>
@@ -102,6 +121,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<select name="paymentMethod">
 										<option value="Cash on Delivery">Cash on Delivery</option>
+										<option value="paypal">Paypal</option>
 									</select>
 								</div>
 								<div>
@@ -128,27 +148,33 @@
 	<jsp:directive.include file="footer.jsp"/>
 
 </body>
+
 	<script type="text/javascript">
 	
 		$(document).ready(function(){
 			$("#orderForm").validate({
 				rules:{
-					recipientName: "required",
-					recipientPhone: "required",
-					address: "required",
+					firstName: "required",
+					lastName: "required",
+					phone: "required",
+					addressLine1: "required",
 					city: "required",
+					state: "required",
 					country: "required",
 					zipcode: "required",
 				},
 				messages:{
-					recipientName: "Please enter Recipients Name",
-					recipientPhone: "Please enter phone",
-					address: "Please enter Street Address",
+					firstName: "Please enter Recipients First Name",
+					lastName: "Please enter Recipients Last Name",
+					phone: "Please enter phone",
+					addressLine1: "Please enter Street Address",
 					city: "Please enter City",
+					state: "Please enter State",
 					country: "Please enter Country",
 					zipcode: "Please enter Zip Code",
 				}
 			});
 		});
 		</script>
+		
 	</html>

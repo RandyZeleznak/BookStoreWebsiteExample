@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import com.bookstore.dao.CustomerDAO;
 import com.bookstore.entity.Customer;
+import com.bookstore.service.CommonUtility;
+
 
 public class CustomerServices {
 	private CustomerDAO customerDAO;
@@ -168,12 +170,13 @@ public class CustomerServices {
 	}
 
 	public void editCustomer() throws ServletException, IOException {
+		CommonUtility.generateCountryList(request);
 		Integer customerId = Integer.parseInt(request.getParameter("id"));
 		Customer customer = customerDAO.get(customerId);
 		
 		request.setAttribute("customer", customer);
 		
-		generateCountryList();
+		CommonUtility.generateCountryList(request);
 		
 		String editPage = "customer_form.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(editPage);
@@ -182,6 +185,7 @@ public class CustomerServices {
 	}
 
 	public void updateCustomer() throws ServletException, IOException {
+		CommonUtility.generateCountryList(request);
 		Integer customerId = Integer.parseInt(request.getParameter("customerId"));
 		String email = request.getParameter("email");
 		
@@ -274,7 +278,7 @@ public class CustomerServices {
 	}
 
 	public void showCustomerProfileEditForm() throws ServletException, IOException {
-		generateCountryList();
+		CommonUtility.generateCountryList(request);
 		String editPage = "frontend/edit_profile.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(editPage);
 		dispatcher.forward(request, response);
@@ -290,7 +294,7 @@ public class CustomerServices {
 	}
 
 	public void newCustomer() throws ServletException, IOException {
-		generateCountryList();
+		CommonUtility.generateCountryList(request);
 		
 		
 		
@@ -299,22 +303,10 @@ public class CustomerServices {
 		
 	}
 
-	private void generateCountryList() {
-		String[] countryCodes = Locale.getISOCountries();
-		Map<String, String> mapCountries = new TreeMap<>();
-		
-		for(String countryCode : countryCodes) {
-			Locale locale = new Locale("", countryCode);
-			String code = locale.getCountry();
-			String name = locale.getDisplayCountry();
-			
-			mapCountries.put(name, code);
-		}
-			request.setAttribute("mapCountries", mapCountries);
-	}
+
 	
 public void showCustomerRegistrationForm() throws ServletException, IOException {
-	generateCountryList();
+	CommonUtility.generateCountryList(request);
 	String registerForm = "frontend/register_form.jsp";
 	RequestDispatcher dispatcher = request.getRequestDispatcher(registerForm);
 	dispatcher.forward(request, response);

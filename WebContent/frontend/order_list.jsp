@@ -12,11 +12,12 @@
 </head>
 <body>
 
-	<jsp:directive.include file="header.jsp"/>
+	
 	
 	<div align="center">
+		<jsp:directive.include file="header.jsp"/>
 	<div>
-	<h2 class="pageheading"> My Order History</h2>
+		<h2 class="pageheading"> My Order History</h2>
 	<br/><br>
 	</div>
 	

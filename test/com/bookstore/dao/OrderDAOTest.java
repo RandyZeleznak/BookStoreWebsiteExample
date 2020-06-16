@@ -82,6 +82,7 @@ public class OrderDAOTest {
 		order.setFirstName("Joe Bonamassa");
 		order.setPhone("123456789");
 		order.setAddressLine1("123 Broadway, New York, NY");
+		order.setAddressLine1("123 Broadway, New York, NY");
 
 		Set<OrderDetail> orderDetails = new HashSet<>();
 		OrderDetail orderDetail = new OrderDetail();

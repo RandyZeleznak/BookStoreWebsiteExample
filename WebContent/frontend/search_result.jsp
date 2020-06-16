@@ -41,7 +41,7 @@
 							<div><i> by ${book.author}</i></div>
 							<div><p>${fn:substring(book.description,0,100)}...</p></div>
 						</div>
-							<div id="search-price"
+							<div id="search-price">
 								<h3><b>$${book.price}</b></h3>
 							<h3><a href=""> Add To Cart</a></h3>
 						</div>

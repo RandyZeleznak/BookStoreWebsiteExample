@@ -3,6 +3,7 @@ package com.bookstore.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -89,6 +90,11 @@ public class BookOrder implements java.io.Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	@Transient
+	public String getCountryName() {
+		return new Locale("", this.country).getDisplayCountry();
+	}
 
 	@Column(name = "r_zipcode", nullable = false, length = 24)
 	public String getZipcode() {
@@ -132,12 +138,13 @@ public class BookOrder implements java.io.Serializable {
 	public BookOrder() {
 	}
 
-	public BookOrder(Customer customer, Date orderDate, String shippingAddress, String recipientName,
+	public BookOrder(Customer customer, Date orderDate, String addressLine1, String firstName, String lastName,
 			String recipientPhone, String paymentMethod, float orderTotal, String orderStatus) {
 		this.customer = customer;
 		this.orderDate = orderDate;
-		this.addressLine1 = shippingAddress;
-		this.firstName = recipientName;
+		this.addressLine1 = addressLine1;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.phone = recipientPhone;
 		this.paymentMethod = paymentMethod;
 
@@ -147,13 +154,14 @@ public class BookOrder implements java.io.Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	public BookOrder(Customer customer, Date orderDate, String shippingAddress, String recipientName,
+	public BookOrder(Customer customer, Date orderDate, String addressLine1, String firstName, String lastName,
 			String recipientPhone, String paymentMethod, float orderTotal, String orderStatus,
 			Set<OrderDetail> orderDetails) {
 		this.customer = customer;
 		this.orderDate = orderDate;
-		this.addressLine1 = shippingAddress;
-		this.firstName = recipientName;
+		this.addressLine1 = addressLine1;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.phone = recipientPhone;
 		this.paymentMethod = paymentMethod;
 		this.orderTotal = orderTotal;
@@ -210,6 +218,7 @@ public class BookOrder implements java.io.Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	@Column(name = "r_lastname", nullable = false, length = 30)
 	public String getLastName() {
 		return this.lastName;

@@ -104,10 +104,18 @@ public class UserServices {
 	
 	public void deleteUser() throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("id"));
+		Users userById = userDAO.get(userId);
+		
+		if(userById == null) {
+			String message = "User ID " + userId + " is not in database.";
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("message.jsp");
+			requestDispatcher.forward(request, response);
+			
+		}else {
 		userDAO.delete(userId);
 		String message = "User has been deleted sucessfully";
 		listUser(message);
-		
+		}
 	}
 	
 	public void login() throws ServletException, IOException {
