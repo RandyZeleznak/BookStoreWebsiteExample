@@ -6,10 +6,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bookstore.service.OrderServices;
 import com.bookstore.service.PaymentServices;
+import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.ShippingAddress;
+import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 
 
@@ -30,7 +34,24 @@ public class ExecutePaymentServlet extends HttpServlet {
 			OrderServices orderServices = new OrderServices(request, response);
 			Integer orderId = orderServices.placeOrderPaypal(payment);
 			
-			response.getWriter().println("Successful Payment, Order Id: " +orderId);
+			HttpSession session = request.getSession();
+			session.setAttribute("orderId", orderId);
+			
+			PayerInfo payerInfo = payment.getPayer().getPayerInfo();
+			Transaction transaction = payment.getTransactions().get(0);
+			//ShippingAddress shippingAddress = transaction.getItemList().getShippingAddress();
+			
+			request.setAttribute("payer", payerInfo);
+			request.setAttribute("transaction", transaction);
+			
+			
+			String receiptPage = "frontend/payment_receipt.jsp";
+			System.out.println("Receipt Page = " +receiptPage);
+			request.getRequestDispatcher(receiptPage).forward(request, response);
+			
+			
+			
+	//		response.getWriter().println("Successful Payment, Order Id: " +orderId);
 			
 		} catch (PayPalRESTException e) {
 			// TODO Auto-generated catch block
